@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
+    <PackageReference Include="stackexchange.redis" Version="2.2.50" />
+  </ItemGroup>
+
+  <Import Project="../../LoremipsumSharp.Collections.version.props" />
+
+</Project>
