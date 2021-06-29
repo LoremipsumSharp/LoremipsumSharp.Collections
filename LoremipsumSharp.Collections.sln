@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loremipsumsharp.AspNetCore", "src\Loremipsumsharp.AspNetCore\Loremipsumsharp.AspNetCore.csproj", "{17062439-10B6-42F1-99EF-FBC36433C62D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoremipsumSharp.AspNetCore", "src\LoremipsumSharp.AspNetCore\LoremipsumSharp.AspNetCore.csproj", "{17062439-10B6-42F1-99EF-FBC36433C62D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoremipsumSharp.Common", "src\LoremipsumSharp.Common\LoremipsumSharp.Common.csproj", "{7F0ACD1D-B638-4E49-BE29-93E71F210BDB}"
 EndProject

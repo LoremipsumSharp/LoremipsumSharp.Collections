@@ -8,4 +8,6 @@
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
   </ItemGroup>
 
+  <Import Project="../../LoremipsumSharp.Collections.version.props" />
+
 </Project>

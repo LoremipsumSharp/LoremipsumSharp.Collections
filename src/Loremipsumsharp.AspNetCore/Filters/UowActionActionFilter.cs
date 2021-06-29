@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Loremipsumsharp.AspNetCore.Filters
+namespace LoremipsumSharp.AspNetCore.Filters
 {
-   public class UowActionActionFilter : IAsyncActionFilter
+    public class UowActionActionFilter : IAsyncActionFilter
     {
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
@@ -30,7 +30,7 @@ namespace Loremipsumsharp.AspNetCore.Filters
             }
 
             var unitOfWork = _serviceProvider.GetService<IUnitOfWork>();
-            if(unitOfWork == null)
+            if (unitOfWork == null)
             {
                 await next();
                 return;
