@@ -98,5 +98,8 @@ namespace LoremipsumSharp.EfCore
             page.Items = query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return page;
         }
+
+
+        
     }
 }

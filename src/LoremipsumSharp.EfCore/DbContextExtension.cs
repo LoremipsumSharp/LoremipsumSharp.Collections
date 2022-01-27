@@ -19,5 +19,7 @@ namespace LoremipsumSharp.EfCore
 
             return new Page<T>() { Items = items.ToList(), TotalCount = count };
         }
+
+        
     }
 }
