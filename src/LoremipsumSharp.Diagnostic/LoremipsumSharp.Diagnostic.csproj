@@ -4,9 +4,11 @@
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
+  
+  <Import Project="../../LoremipsumSharp.Collections.version.props" />
 
 
-  <ItemGroup Condition=" '$(TargetFramework)'=='netcoreapp3.1' ">
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

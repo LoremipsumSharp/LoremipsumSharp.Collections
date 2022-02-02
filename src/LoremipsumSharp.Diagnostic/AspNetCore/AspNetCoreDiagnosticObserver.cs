@@ -29,7 +29,7 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
         [DiagnosticName("Microsoft.AspNetCore.Hosting.UnhandledException")]
         public void HostingUnhandledException(HttpContext httpContext, Exception exception)
         {
-            var alertMessage = new AspNetCoreUnhandledExceptionMessage();
+            var alertMessage = new AspNetCoreUnhandledExceptionMessage(_options.ServiceName);
             alertMessage.ExceptionMessage = exception.Message?.ToString() ?? string.Empty;
             alertMessage.ExceptionStackTrace = exception.StackTrace?.ToString() ?? string.Empty;
 
@@ -51,7 +51,7 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
 
 
             var throttleKey = $"AspNetCoreDiagnosticObserver:UnhandledException:Alert:{alertMessage.GetHashCode()}";
-            _alerter.Alert(throttleKey, JsonConvert.SerializeObject(alertMessage), _options.AlertThrottleInterval);
+            _ = _alerter.TryAlert(throttleKey, JsonConvert.SerializeObject(alertMessage), _options.AlertThrottleInterval);
         }
 
 
@@ -66,7 +66,7 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
         [DiagnosticName("Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")]
         public void EndRequest(HttpContext httpContext)
         {
-            var alertMessage = new AspNetCoreRequestTimeoutMessage();
+            var alertMessage = new AspNetCoreRequestTimeoutMessage(_options.ServiceName);
             var stopwatch = (Stopwatch)httpContext.Items["AspNetCoreDiagnosticObserver.Stopwatch"];
             if (stopwatch == null) return;
             alertMessage.RequestDuration = stopwatch.Elapsed.TotalMilliseconds;
@@ -78,7 +78,7 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
             alertMessage.BodyString = httpContext.Items["AspNetCoreDiagnosticObserver.BodyString"]?.ToString();
 
             var throttleKey = $"AspNetCoreDiagnosticObserver:Timeout:Alert:{alertMessage.RequestUrl}";
-            _alerter.Alert(throttleKey, JsonConvert.SerializeObject(alertMessage), _options.AlertThrottleInterval);
+            _ = _alerter.TryAlert(throttleKey, JsonConvert.SerializeObject(alertMessage), _options.AlertThrottleInterval);
         }
 
         private string CollectBody(HttpContext httpContext)
@@ -94,7 +94,7 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
             try
             {
                 using var reader = new StreamReader(httpContext.Request.Body, Encoding.UTF8, true, 1024, true);
-                var body = reader.ReadToEnd();
+                var body = reader.ReadToEndAsync().Result;
                 return body;
             }
             finally

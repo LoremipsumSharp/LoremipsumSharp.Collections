@@ -55,7 +55,7 @@ namespace LoremipsumSharp.Diagnostic
                 if (_options.EnableAspNetCoreDiagnostic)
                 {
                     AspNetCoreDiagnosticObserver aspNetCoreDiagnosticObserver = scope.ServiceProvider.GetService<AspNetCoreDiagnosticObserver>();
-                    value.SubscribeWithAdapter(aspNetCoreDiagnosticObserver);
+                    _disposeables.Add(value.SubscribeWithAdapter(aspNetCoreDiagnosticObserver));
                 }
             }
             if (value.Name == "Microsoft.EntityFrameworkCore")
@@ -63,7 +63,7 @@ namespace LoremipsumSharp.Diagnostic
                 if (_options.EnableEfCoreSlowQueryDiagnostic)
                 {
                     EfCoreDiagnosticsObserver efCoreDiagnosticsObserver = scope.ServiceProvider.GetService<EfCoreDiagnosticsObserver>();
-                    value.SubscribeWithAdapter(efCoreDiagnosticsObserver);
+                    _disposeables.Add(value.Subscribe(efCoreDiagnosticsObserver));
                 }
             }
         }

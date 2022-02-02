@@ -3,8 +3,11 @@ using Newtonsoft.Json;
 
 namespace LoremipsumSharp.Diagnostic.EfCore
 {
-    public class EfCoreSlowSqlAlertMessage
+    public class EfCoreSlowSqlAlertMessage:AlertMessageBase
     {
+        public EfCoreSlowSqlAlertMessage(string serviceName) : base(serviceName)
+        {
+        }
 
         public string CommandText { get; set; }
         public double CommandDuration { get; set; }

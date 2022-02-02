@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="../../LoremipsumSharp.Collections.version.props" />
   <ItemGroup>
     <ProjectReference Include="..\LoremipsumSharp.ChatBot.Abstractions\LoremipsumSharp.ChatBot.Abstractions.csproj" />
   </ItemGroup>

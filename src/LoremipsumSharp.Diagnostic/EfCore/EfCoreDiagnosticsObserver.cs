@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace LoremipsumSharp.EfCore
 {
-    public class EfCoreDiagnosticsObserver
+    public class EfCoreDiagnosticsObserver : IObserver<KeyValuePair<string, object?>>
     {
         private readonly IChatBot _chatBot;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -25,12 +25,15 @@ namespace LoremipsumSharp.EfCore
             _alerter = alerter;
         }
 
-
         [DiagnosticName("Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted")]
         public void CommandExecuted(CommandExecutedEventData eventData)
         {
+            if (eventData == null)
+            {
+                return;
+            }
             var context = _httpContextAccessor.HttpContext;
-            var alertMessage = new EfCoreSlowSqlAlertMessage();
+            var alertMessage = new EfCoreSlowSqlAlertMessage(_options.ServiceName);
             alertMessage.CommandText = eventData.Command.CommandText;
             alertMessage.CommandDuration = eventData.Duration.TotalMilliseconds;
             if (alertMessage.CommandDuration < _options.EfCoreSlowSqlThreshold) return;
@@ -42,8 +45,26 @@ namespace LoremipsumSharp.EfCore
                 alertMessage.BodyString = context.Items.TryGetValue("AspNetCoreDiagnosticObserver.BodyString", out var body) ? body.ToString() : string.Empty;
             }
             var throttleKey = $"EfCoreDiagnosticsObserver:SlowSql:Alert:{alertMessage.GetHashCode()}";
-            _alerter.Alert(throttleKey, alertMessage.ToString(), _options.AlertThrottleInterval);
+            _ = _alerter.TryAlert(throttleKey, alertMessage.ToString(), _options.AlertThrottleInterval);
 
+        }
+
+        public void OnCompleted()
+        {
+
+        }
+
+        public void OnError(Exception error)
+        {
+
+        }
+
+        public void OnNext(KeyValuePair<string, object?> value)
+        {
+            if (value.Key == RelationalEventId.CommandExecuted.Name && value.Value is CommandExecutedEventData commandExecutedEventData)
+            {
+                this.CommandExecuted(commandExecutedEventData);
+            }
         }
     }
 }

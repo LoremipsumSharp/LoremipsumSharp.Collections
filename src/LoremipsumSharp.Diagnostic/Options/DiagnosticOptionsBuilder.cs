@@ -58,5 +58,12 @@ namespace LoremipsumSharp.Diagnostic.Options
             });
 
         }
+
+        public DiagnosticOptionsBuilder WithServiceName(string serviceName)
+        {
+            return Configure(opt=>{
+                opt.ServiceName = serviceName;
+            });
+        }
     }
 }

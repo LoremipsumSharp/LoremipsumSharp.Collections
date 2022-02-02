@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace LoremipsumSharp.Diagnostic.AspNetCore
 {
-    public class AspNetCoreUnhandledExceptionMessage
+    public class AspNetCoreUnhandledExceptionMessage:AlertMessageBase
     {
         public string Type => "异常告警";
         public string SourceIp { get; set; }
@@ -20,6 +20,11 @@ namespace LoremipsumSharp.Diagnostic.AspNetCore
         [JsonIgnore]
         public string ExceptionStackTrace { get; set; }
         private string _bodyString = string.Empty;
+
+        public AspNetCoreUnhandledExceptionMessage(string serviceName) : base(serviceName)
+        {
+        }
+
         public string BodyString { get { return _bodyString.Length > 30 ? _bodyString.Substring(0, 30) :_bodyString; } set { _bodyString = value; } }
 
 

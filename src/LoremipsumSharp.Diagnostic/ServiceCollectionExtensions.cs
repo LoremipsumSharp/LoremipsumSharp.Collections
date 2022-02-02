@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using LoremipsumSharp.Diagnostic.AspNetCore;
 using LoremipsumSharp.Diagnostic.Options;
 using LoremipsumSharp.EfCore;
@@ -11,7 +8,7 @@ namespace LoremipsumSharp.Diagnostic
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddDiagnostic(this IServiceCollection services, Action<DiagnosticOptionsBuilder> configurer)
+        public static DiagnosticOptionsBuilder AddDiagnostic(this IServiceCollection services, Action<DiagnosticOptions> configure)
         {
             var builder = new DiagnosticOptionsBuilder(services);
             builder.Services.AddSingleton<EfCoreDiagnosticsObserver>();
@@ -21,8 +18,17 @@ namespace LoremipsumSharp.Diagnostic
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddMemoryCache();
             builder.Services.AddHostedService<DiagnosticBoostraper>();
-            configurer.Invoke(builder);
-            return services;
+            builder.Services.Configure(configure);
+            return builder;
+        }
+
+        public static DiagnosticOptionsBuilder AddDiagnostic(this IServiceCollection services)
+        {
+            var options = new DiagnosticOptions();
+            return AddDiagnostic(services, (opt) =>
+            {
+                opt = options;
+            });
         }
     }
 }
