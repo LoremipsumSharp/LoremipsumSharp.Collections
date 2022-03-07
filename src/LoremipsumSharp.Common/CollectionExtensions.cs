@@ -52,5 +52,18 @@ namespace LoremipsumSharp.Common
 
             return new DiffEnumerable<TLeft, TRight>(leftOnly, intersection, rightOnly);
         }
+
+        public static int IndexOfBy<TSource, TKey>(this IEnumerable<TSource> source,
+                                          TKey value,
+                                          Func<TSource, TKey> keySelector)
+        {
+            return source.Select((x, i) => new
+            {
+                Index = i,
+                Value = x
+            })
+                         .FirstOrDefault(x => keySelector(x.Value)?.Equals(value) ?? false)
+                         ?.Index ?? -1;
+        }
     }
 }

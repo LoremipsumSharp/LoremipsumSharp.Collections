@@ -60,5 +60,22 @@ namespace LoremipsumSharp.Common
             }
         }
 
+
+        public static bool IsJson(this string value)
+        {
+            bool isJson;
+            try
+            {
+                JToken.Parse(value);
+                isJson = true;
+            }
+            catch (JsonReaderException)
+            {
+                isJson = false;
+            }
+            return isJson;
+
+        }
+
     }
 }
