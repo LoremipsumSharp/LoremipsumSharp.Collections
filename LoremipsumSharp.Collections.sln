@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoremipsumSharp.ChatBot.Yun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoremipsumSharp.ChatBot.DingTalk", "src\LoremipsumSharp.ChatBot.DingTalk\LoremipsumSharp.ChatBot.DingTalk.csproj", "{EFCF8B74-0C01-42F3-ABC7-506E8BB0ED48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoremipsumSharp.RabbitMq", "src\LoremipsumSharp.RabbitMq\LoremipsumSharp.RabbitMq.csproj", "{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{EFCF8B74-0C01-42F3-ABC7-506E8BB0ED48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFCF8B74-0C01-42F3-ABC7-506E8BB0ED48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFCF8B74-0C01-42F3-ABC7-506E8BB0ED48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +77,6 @@ Global
 		{659846F1-49EA-491D-8779-1186FA708B8B} = {60973E01-7337-476E-A692-A2BE8C8B888A}
 		{A41D9206-A4AF-4FA4-A14A-3EF3979A99D5} = {60973E01-7337-476E-A692-A2BE8C8B888A}
 		{EFCF8B74-0C01-42F3-ABC7-506E8BB0ED48} = {60973E01-7337-476E-A692-A2BE8C8B888A}
+		{8141CD0C-4E0E-4CA1-915B-989DDD2B39B7} = {60973E01-7337-476E-A692-A2BE8C8B888A}
 	EndGlobalSection
 EndGlobal

@@ -17,5 +17,7 @@ namespace LoremipsumSharp.Common
                     prop => valueSelect(prop.GetValue(obj))
                 );
         }
+
+        
     }
 }
